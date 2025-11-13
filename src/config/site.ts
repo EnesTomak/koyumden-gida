@@ -120,6 +120,28 @@ export const siteConfig = {
       ]
     },
 
+    // === YENİ EKLENEN BÖLÜM: KURUMSAL REFERANSLAR ===
+    clients: {
+      title: "Güven Ortaklarımız",
+      description: "Lezzetlerimizi tercih eden değerli kurumsal iş ortaklarımızdan bazıları.",
+      // ÖNEMLİ: Bu logoları public/images/clients/ klasörüne kendiniz eklemelisiniz.
+      // === Test logoları eklendi ===
+      list: [
+        {
+          name: "Test Referans 1",
+          logo: "/images/clients/placeholder-1.svg" 
+        },
+        {
+          name: "Test Referans 2",
+          logo: "/images/clients/placeholder-2.svg" 
+        },
+        {
+          name: "Test Referans 3",
+          logo: "/images/clients/placeholder-3.svg" 
+        }
+      ]
+    },
+
     // --- ContactSection (İletişim Bölümü) ---
     contact: {
       title: "Köyümden Gıda'yı Ziyaret Edin",
