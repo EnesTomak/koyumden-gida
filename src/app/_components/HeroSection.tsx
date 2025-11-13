@@ -23,6 +23,8 @@ export default function HeroSection() {
           quality={75}
           className="object-cover"
           sizes="100vw"
+          placeholder="blur" // <-- GÜNCELLENDİ
+          blurDataURL="data:image/webp;base64,UklGRloCAABXRUJQVlA4IE4CAAAwCQCdASoGAAQAAUA0JZwCdAD0/7+AA" // Düşük kaliteli resim verisi
         />
         <div className="absolute inset-0 bg-black/30"></div>
       </div>

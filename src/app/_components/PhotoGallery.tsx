@@ -55,10 +55,11 @@ export default function PhotoGallery() {
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[200px] md:auto-rows-[280px]">
           {galleryItems.map((item) => (
-            <article
+            <button
               key={item.id}
-              className={`group relative overflow-hidden rounded-2xl bg-parchment shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer ${item.gridClass}`}
+              className={`group relative overflow-hidden rounded-2xl bg-parchment shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer ${item.gridClass} text-left`} // 'text-left' eklendi
               onClick={() => setLightboxImage(item)}
+              aria-label={`Galeride ${item.title} resmini tam ekran aç`} // <-- GÜNCELLENDİ (Erişilebilirlik)
             >
               {/* Image */}
               <div className="absolute inset-0">
@@ -69,6 +70,9 @@ export default function PhotoGallery() {
                   quality={85}
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  placeholder="blur" // <-- GÜNCELLENDİ
+                  // Her resim için ayrı blurDataURL gerekir, şimdilik en yaygın olanı kullanalım:
+                  blurDataURL="data:image/webp;base64,UklGRloCAABXRUJQVlA4IE4CAAAwCQCdASoGAAQAAUA0JZwCdAD0/7+AA"
                 />
               </div>
 
@@ -87,7 +91,7 @@ export default function PhotoGallery() {
 
               {/* Subtle corner accent */}
               <div className="absolute top-4 right-4 w-2 h-2 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </article>
+            </button>
           ))}
         </div>
 

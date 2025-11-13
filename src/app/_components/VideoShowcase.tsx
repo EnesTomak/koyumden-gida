@@ -42,7 +42,9 @@ export default function VideoShowcase() {
                   fill
                   loading="lazy"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 896px) 100vw, 896px" // max-w-4xl = 896px
+                  sizes="(max-width: 896px) 100vw, 896px"
+                  placeholder="blur" // <-- GÜNCELLENDİ
+                  blurDataURL="data:image/webp;base64,UklGRj4CAABXRUJQVlA4IDICAADwAgCdASoGAAQAAUA0JZwCdAE/AAC1jbAAA" // Düşük kaliteli resim verisi
                 />
                 {/* Oynat Butonu Görseli */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/10">
