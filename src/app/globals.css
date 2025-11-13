@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #faf8f6;
+  --foreground: #1a1a1a;
+  
+  /* Nature Distilled Renk Paleti */
+  --olive-green: #6b7f5a;
+  --earth-brown: #8b6914;
+  --parchment-beige: #f5f0e8;
+  --slate-grey: #3d4852;
+  --accent-red: #c94d4d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter), sans-serif;
+  font-display: swap;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+  font-display: swap;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+/* StoryGrid Kart Animasyonları */
+.story-card {
+  opacity: 0;
+  transform: translateY(30px);
+  /* Gecikmeyi (transition-delay) style prop'undan alacak şekilde ayarla */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.story-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
