@@ -41,6 +41,33 @@ export default function RootLayout({
     <html lang="tr" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         <SchemaMarkup />
+
+        {/* === GÜNCELLENDİ: Performans İpuçları (Resource Hints) === */}
+        {/*
+          Tarayıcıya, bu dış kaynaklara (YouTube, Google Haritalar)
+          henüz ihtiyaç duymadan önce bağlanmasını söylüyoruz.
+          Bu, sitenizdeki video ve haritanın daha hızlı yüklenmesini sağlar.
+        */}
+
+        {/* YouTube (VideoShowcase bileşeni için) */}
+        <link
+          rel="preconnect"
+          href="https://www.youtube.com"
+          crossOrigin="anonymous"
+        />
+        
+        {/* Google Haritalar (ContactSection bileşeni için) */}
+        <link
+          rel="preconnect"
+          href="https://googleusercontent.com" // Harita iframe'inin kaynağı
+          crossOrigin="anonymous"
+        />
+        
+        {/* Google Analytics (Yakında eklenecek, şimdiden ekleyelim) */}
+        <link
+          rel="preconnect"
+          href="https://www.googletagmanager.com"
+        />
       </head>
       <body className="antialiased">{children}</body>
     </html>

@@ -1,5 +1,5 @@
 // Dosya Yolu: src/app/_components/StoryGrid.tsx
-'use client'; // Bu, 'use client' olarak kalmalı (useEffect ve useRef kullanacağız)
+'use client'; 
 
 import React, { useEffect, useRef } from 'react';
 import {
@@ -8,7 +8,7 @@ import {
   OpacityIcon,
   MixIcon,
 } from '@radix-ui/react-icons';
-// GÜNCELLEME: GSAP ve ScrollTrigger import'ları SİLİNDİ.
+import { siteConfig } from '@/src/config/site'; // === GÜNCELLENDİ ===
 
 interface StoryCardProps {
   title: string;
@@ -17,14 +17,12 @@ interface StoryCardProps {
   icon?: React.ReactNode;
 }
 
-// GÜNCELLEME: Tip tanımına `style?: React.CSSProperties` eklendi
 const StoryCard: React.FC<
-  StoryCardProps & { className?: string; style?: React.CSSProperties } // <-- Burayı güncelle
-> = ({ title, description, icon, className, style }) => { // <-- style'ı props'tan al
+  StoryCardProps & { className?: string; style?: React.CSSProperties }
+> = ({ title, description, icon, className, style }) => {
   return (
     <div
-      // GÜNCELLEME: style prop'unu div'e aktar
-      style={style} // <-- Bu satırı ekle
+      style={style}
       className={`story-card group relative overflow-hidden rounded-lg bg-white p-8 shadow-lg ${
         className || ''
       }`}
@@ -42,88 +40,68 @@ const StoryCard: React.FC<
 };
 
 export default function StoryGrid() {
-  // GÜNCELLEME: Sadece grid'in ana container'ı için ref'e ihtiyacımız var
   const gridRef = useRef<HTMLDivElement>(null);
 
-  // GÜNCELLEME: GSAP useEffect'i yerine IntersectionObserver useEffect'i
+  // IntersectionObserver useEffect (Animasyon için)
   useEffect(() => {
-    // Client-side check
     if (typeof window === 'undefined' || !gridRef.current) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Element ekrana girdiğinde 'is-visible' sınıfını ekle
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            // Animasyon tetiklendikten sonra performansı artırmak için
-            // bu elementi izlemeyi bırak
             observer.unobserve(entry.target);
           }
         });
       },
-      {
-        threshold: 0.2, // Kartın %20'si göründüğünde tetikle
-        rootMargin: '0px 0px -50px 0px', // Tetiklemeyi biraz geciktir
-      }
+      { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
     );
-
-    // Grid içindeki tüm 'story-card' elementlerini seç ve izle
     const cards = gridRef.current.querySelectorAll('.story-card');
-    if (cards.length > 0) {
-      cards.forEach((card) => {
-        observer.observe(card);
-      });
-    }
-
-    // Component unmount olduğunda observer'ı temizle
+    if (cards.length > 0) cards.forEach((card) => observer.observe(card));
     return () => {
-      if (cards.length > 0) {
-        cards.forEach((card) => {
-          observer.unobserve(card);
-        });
-      }
+      if (cards.length > 0) cards.forEach((card) => observer.unobserve(card));
     };
-  }, []); // Bağımlılık dizisi boş kalmalı
+  }, []); 
+
+  // === GÜNCELLENDİ: İçerik siteConfig'den çekiliyor ===
+  const storyContent = siteConfig.content.story;
 
   return (
     <section id="story" className="bg-parchment py-20 px-4">
       <div className="mx-auto max-w-7xl">
-        {/* Bölüm Başlığı (Değişiklik yok) */}
+        {/* Bölüm Başlığı (Dinamik) */}
         <div className="mb-16 text-center">
           <h2 className="font-serif mb-4 text-4xl font-bold text-slate sm:text-5xl">
-            Mutfağımızdan Sofranıza
+            {storyContent.title}
           </h2>
           <p className="text-slate/70 mx-auto max-w-2xl">
-            Her bir sarma, aile geleneğimizin ve doğanın en iyisini sunma
-            tutkusunun bir yansımasıdır
+            {storyContent.description}
           </p>
         </div>
 
-        {/* GÜNCELLEME: Izgaraya ref eklendi */}
+        {/* Kartlar (Dinamik) */}
         <div ref={gridRef} className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-          {/* GÜNCELLEME: Kademeli gecikme (stagger) için inline style eklendi */}
           <StoryCard
-            title="Kalite Standardımız"
-            description="Üç nesillik aile tarifimiz, modern teknolojiyle birleşti. El değmeden, hijyenik üretimle her sarmada aynı lezzet."
+            title={storyContent.cards[0].title}
+            description={storyContent.cards[0].description}
             icon={<CheckCircledIcon className="w-10 h-10 text-accent mb-4" />}
             style={{ transitionDelay: '100ms' }}
           />
           <StoryCard
-            title="En Taze Yapraklar"
-            description="Her sabah erken saatlerde toplanan, organik asma yaprakları. Doğanın en saf hali, mutfağımızda."
+            title={storyContent.cards[1].title}
+            description={storyContent.cards[1].description}
             icon={<BlendingModeIcon className="w-10 h-10 text-accent mb-4" />}
             style={{ transitionDelay: '200ms' }}
           />
           <StoryCard
-            title="Saf Zeytinyağı"
-            description="Sadece yerel üreticilerden seçilen, soğuk sıkım zeytinyağı. Her damlası lezzet dolu."
+            title={storyContent.cards[2].title}
+            description={storyContent.cards[2].description}
             icon={<OpacityIcon className="w-10 h-10 text-accent mb-4" />}
             style={{ transitionDelay: '300ms' }}
           />
           <StoryCard
-            title="Mükemmel Karışım"
-            description="Pirinç, baharat ve otların hassas dengesi. Makine hassasiyetiyle her sarmada tutarlı mükemmellik."
+            title={storyContent.cards[3].title}
+            description={storyContent.cards[3].description}
             icon={<MixIcon className="w-10 h-10 text-accent mb-4" />}
             style={{ transitionDelay: '400ms' }}
           />

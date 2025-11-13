@@ -1,4 +1,3 @@
-// Dosya Yolu: src/app/_components/HeroSection.tsx
 'use client'; 
 
 import Image from 'next/image';

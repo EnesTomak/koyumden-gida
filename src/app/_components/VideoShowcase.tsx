@@ -1,36 +1,34 @@
-// Dosya Yolu: src/app/_components/VideoShowcase.tsx
-'use client'; // GÜNCELLEME: State kullanacağımız için bu bileşeni client component yapıyoruz.
+'use client'; 
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { siteConfig } from '@/src/config/site'; // === GÜNCELLENDİ ===
 
 export default function VideoShowcase() {
-  // GÜNCELLEME: Videonun gösterilip gösterilmeyeceğini takip eden state
   const [showVideo, setShowVideo] = useState(false);
 
-  // GÜNCELLEME: YouTube video ID'si ve başlığı
-  const videoId = 'dQw4w9WgXcQ'; // Orijinal src'den alındı
-  const videoTitle = 'Geleneksel Yaprak Sarma Yapımı';
+  // === GÜNCELLENDİ: İçerik siteConfig'den çekiliyor ===
+  const videoContent = siteConfig.content.video;
+  const videoId = videoContent.videoId;
+  const videoTitle = videoContent.videoTitle;
 
   return (
     <section className="bg-slate py-20 px-4">
       <div className="mx-auto max-w-7xl">
-        {/* Bölüm Başlığı (Değişiklik yok) */}
+        {/* Bölüm Başlığı (Dinamik) */}
         <div className="mb-12 text-center">
           <h2 className="font-serif mb-4 text-4xl font-bold text-white sm:text-5xl">
-            Sarma Ritüeli
+            {videoContent.title}
           </h2>
           <p className="text-parchment/80 mx-auto max-w-2xl">
-            Nasıl yapıldığını izleyin: her adımda gösterilen özen ve tutku
+            {videoContent.description}
           </p>
         </div>
 
-        {/* Video Container (Değişiklik yok) */}
+        {/* Video Container (Dinamik Başlık/Alt Etiket) */}
         <div className="mx-auto max-w-4xl">
           <div className="relative aspect-video overflow-hidden rounded-2xl shadow-2xl">
-            {/* GÜNCELLEME: Koşullu render (Facade veya Iframe) */}
             {!showVideo ? (
-              // 1. Video Facade (Cephe) - Hafif HTML/Resim
               <button
                 onClick={() => setShowVideo(true)}
                 className="group absolute inset-0 h-full w-full cursor-pointer"
@@ -38,15 +36,14 @@ export default function VideoShowcase() {
               >
                 <Image
                   src="/images/video-poster.webp"
-                  alt={videoTitle}
+                  alt={videoTitle} // Dinamik alt etiket
                   fill
                   loading="lazy"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 896px) 100vw, 896px"
-                  placeholder="blur" // <-- GÜNCELLENDİ
-                  blurDataURL="data:image/webp;base64,UklGRj4CAABXRUJQVlA4IDICAADwAgCdASoGAAQAAUA0JZwCdAE/AAC1jbAAA" // Düşük kaliteli resim verisi
+                  placeholder="blur" 
+                  blurDataURL="data:image/webp;base64,UklGRj4CAABXRUJQVlA4IDICAADwAgCdASoGAAQAAUA0JZwCdAE/AAC1jbAAA"
                 />
-                {/* Oynat Butonu Görseli */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/10">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600/80 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-red-600 md:h-20 md:w-20">
                     <svg
@@ -60,11 +57,10 @@ export default function VideoShowcase() {
                 </div>
               </button>
             ) : (
-              // 2. Gerçek Iframe (Kullanıcı tıkladıktan sonra yüklenir)
               <iframe
                 className="absolute inset-0 h-full w-full rounded-2xl"
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-                title={videoTitle}
+                title={videoTitle} // Dinamik başlık
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
