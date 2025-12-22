@@ -10,68 +10,60 @@ export default function HeroSection() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* Hero arka plan görseli */}
-      <div className="absolute inset-0">
+    <section className="relative h-[90vh] w-full overflow-hidden">
+      {/* Arka Plan: Yavaşça hareket eden (Zoom yapan) sinematik görsel */}
+      <div className="absolute inset-0 select-none">
         <Image
           src="/images/hero-background.webp"
-          alt="Köyümden Gıda Organik Zeytinyağlı Yaprak Sarması Tabağı"
+          alt="Köyümden Gıda - El Yapımı Zeytinyağlı Yaprak Sarması"
           fill
           priority
-          quality={75}
-          className="object-cover"
+          quality={85}
+          className="object-cover animate-slow-zoom" // Yavaş zoom efekti ile 'yaşayan' fotoğraf
           sizes="100vw"
           placeholder="blur" 
           blurDataURL="data:image/webp;base64,UklGRloCAABXRUJQVlA4IE4CAAAwCQCdASoGAAQAAUA0JZwCdAD0/7+AA"
         />
-        <div className="absolute inset-0 bg-black/30"></div>
+        {/* Gradient Overlay: Yazıların okunması için alttan yukarı yumuşak karartma */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-deep-green/90"></div>
       </div>
 
-      {/* Hero İçerik */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
+      {/* İçerik */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-end pb-24 px-4 text-center sm:justify-center sm:pb-0">
         
-        {/* LCP hatasını (NO_LCP) düzeltmek için animasyon ve opacity-0 kaldırıldı. */}
-        <h1 className="font-playfair mb-6 text-5xl font-bold text-white sm:text-6xl md:text-7xl">
-          Organik Zeytinyağlı
-          <br />
-          <span className="text-[#f5f0e8]">Yaprak Sarması</span>
+        {/* Üst Başlık - Marka İmzası */}
+        <span className="font-serif italic text-gold text-xl sm:text-2xl mb-4 tracking-wider animate-fade-in-up">
+          Doğadan Sofranıza
+        </span>
+
+        {/* Ana Başlık - Devasa, İnce ve Zarif */}
+        <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl font-medium text-cream mb-6 leading-tight drop-shadow-lg">
+          Zeytinyağlı <br/>
+          <span className="italic text-white">Sarma Sanatı</span>
         </h1>
 
-        {/* Paragraf (Animasyon kalabilir) */}
-        <p className="font-inter mb-8 max-w-2xl text-lg text-white/90 sm:text-xl 
-                      animate-fade-in-up opacity-0 [animation-delay:200ms]">
-          Köyümden Gıda'nın taze lezzetleri, el değmeden hijyenik üretimle 
-          sofranızda.
+        <p className="font-sans max-w-lg mx-auto text-lg text-cream/90 mb-10 font-light leading-relaxed animate-fade-in-up [animation-delay:200ms]">
+          Anne eli değmiş gibi değil, bizzat anne eliyle. 
+          En taze asma yaprakları ve hakiki Ege zeytinyağı ile günlük üretim.
         </p>
 
-        {/* Buton (Animasyon kalabilir) */}
+        {/* Premium Buton - Altın Rengi ve Parlama Efektli */}
         <a
           href={whatsappUrl} 
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 rounded-full bg-accent px-8 py-4 text-lg font-semibold text-white shadow-xl 
-                     transition-all duration-300 hover:scale-105 hover:shadow-2xl 
-                     animate-fade-in-up opacity-0 [animation-delay:400ms]" // Gecikme ayarlandı
+          className="btn-shine group relative inline-flex items-center gap-3 bg-gold px-10 py-5 rounded-full text-deep-green font-bold text-lg shadow-xl hover:bg-white hover:text-deep-green transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up [animation-delay:400ms]"
         >
-          WhatsApp'tan Sipariş Ver
+          <span>WhatsApp ile Sipariş Ver</span>
+          {/* Ok İkonu */}
+          <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
         </a>
-
-        {/* Aşağı kaydırma göstergesi */}
-        <div className="absolute bottom-8 animate-bounce">
-          <a href="#story" aria-label="Hikaye bölümüne git">
-            <svg
-              className="h-8 w-8 text-white"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-          </a>
-        </div>
+        
+        <p className="mt-4 text-sm text-cream/60 animate-fade-in-up [animation-delay:600ms]">
+          *Günlük sınırlı sayıda üretim
+        </p>
       </div>
     </section>
   );
