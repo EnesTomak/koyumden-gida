@@ -5,20 +5,6 @@
 :root {
   --background: #faf8f6;
   --foreground: #1a1a1a;
-
-  /* Nature Distilled Renk Paleti */
-  --olive-green: #6b7f5a;
-  --earth-brown: #8b6914;
-  --parchment-beige: #f5f0e8;
-  --slate-grey: #3d4852;
-  --accent-red: #c94d4d;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f0f0f;
-    --foreground: #ededed;
-  }
 }
 
 html {
@@ -31,7 +17,6 @@ body {
   background: var(--background);
   font-family: var(--font-inter), sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -43,31 +28,22 @@ h6 {
   font-family: var(--font-playfair), serif;
 }
 
-
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
+/* PERFORMANS */
 section {
   content-visibility: auto;
-  contain-intrinsic-size: 1px 500px;
-  /* Tahmini yükseklik */
+  contain-intrinsic-size: 1px 800px;
 }
 
-/* Hero bölümü her zaman görünür olmalı (LCP için) */
 section:first-of-type {
   content-visibility: visible;
   contain-intrinsic-size: auto;
 }
 
+/* ANİMASYON & EFEKTLER */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-  /* Yumuşak geçiş */
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -76,22 +52,21 @@ section:first-of-type {
   transform: translateY(0);
 }
 
-/* Hover efektlerinde performans için */
-.group:hover .group-hover\:scale-110 {
-  will-change: transform;
+.highlight-gold {
+  position: relative;
+  display: inline-block;
 }
 
-/* StoryGrid Kart Animasyonları */
-.story-card {
-  opacity: 0;
-  transform: translateY(30px);
-  /* Gecikmeyi (transition-delay) style prop'undan alacak şekilde ayarla */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  /* Tarayıcıya hangi özelliklerin değişeceğini önceden bildirir (GPU hızlandırma) */
-  will-change: opacity, transform;
-}
-
-.story-card.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.highlight-gold::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 2px;
+  height: 8px;
+  background-color: #e8b923;
+  opacity: 0.3;
+  z-index: -1;
+  transform: rotate(-1deg);
+  border-radius: 4px;
 }

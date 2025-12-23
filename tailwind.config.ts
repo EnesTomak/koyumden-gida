@@ -9,38 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        olive: { light: '#8a9d7a', DEFAULT: '#6b7f5a', dark: '#4a5a3d' },
+        earth: { light: '#a37f1a', DEFAULT: '#8b6914', dark: '#6b4f0f' },
+        parchment: { light: '#faf8f4', DEFAULT: '#f5f0e8', dark: '#e8e0d4' },
+        slate: { light: '#5a6470', DEFAULT: '#3d4852', dark: '#2a3239' },
+        gold: { light: '#f5d462', DEFAULT: '#e8b923', dark: '#c29d1a' },
+        cream: '#fefdf9',
+        accent: { DEFAULT: '#d97642', hover: '#c2643a' },
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        olive: {
-          light: '#8a9d7a',
-          DEFAULT: '#6b7f5a',
-          dark: '#4a5a3d',
-        },
-        earth: {
-          light: '#a37f1a',
-          DEFAULT: '#8b6914',
-          dark: '#6b4f0f',
-        },
-        parchment: {
-          light: '#faf8f4',
-          DEFAULT: '#f5f0e8',
-          dark: '#e8e0d4',
-        },
-        slate: {
-          light: '#5a6470',
-          DEFAULT: '#3d4852',
-          dark: '#2a3239',
-        },
-        gold: {
-          light: '#f5d462',
-          DEFAULT: '#e8b923',
-          dark: '#c29d1a',
-        },
-        cream: '#fefdf9',
-        accent: {
-          DEFAULT: '#d97642',
-          hover: '#c2643a',
-        },
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],

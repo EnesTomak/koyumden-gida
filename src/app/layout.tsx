@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import SchemaMarkup from './_components/SchemaMarkup';
+import Header from './_components/Header';
 import { siteConfig } from '@/src/config/site';
 
 const inter = Inter({
@@ -55,21 +56,24 @@ export default function RootLayout({
           href="https://www.youtube.com"
           crossOrigin="anonymous"
         />
-        
+
         {/* Google Haritalar (ContactSection bileşeni için) */}
         <link
           rel="preconnect"
           href="https://googleusercontent.com" // Harita iframe'inin kaynağı
           crossOrigin="anonymous"
         />
-        
+
         {/* Google Analytics (Yakında eklenecek, şimdiden ekleyelim) */}
         <link
           rel="preconnect"
           href="https://www.googletagmanager.com"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
