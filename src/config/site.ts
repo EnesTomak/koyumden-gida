@@ -1,40 +1,32 @@
 export const siteConfig = {
   // === 1. MARKA ve SEO BİLGİLERİ ===
   name: "Köyümden Gıda",
-  title: "Köyümden Gıda | Organik Zeytinyağlı Yaprak Sarması",
-  description: "Köyümden Gıda'dan taze asma yaprağı ile hazırlanmış, organik zeytinyağlı yaprak sarması. Geleneksel lezzetler kapınızda.",
-  keywords: "organik yaprak sarması, zeytinyağlı yaprak sarması, köyümden gıda, yaprak sarması sipariş, ev yapımı yaprak sarma, yaprak sarması",
-  url: "https://koyumdengida.com.tr", // !! ÖNEMLİ: Burayı kendi domaininizle değiştirin !!
+  title: "Köyümden Gıda | Üç Nesillik Lezzet Hikayesi",
+  description: "Büyükannelerimizin sofrasındaki o lezzet, şimdi modern hijyen standartlarıyla kapınızda. Organik zeytinyağlı yaprak sarması.",
+  keywords: "organik yaprak sarması, zeytinyağlı yaprak sarması, köyümden gıda, yaprak sarması sipariş, ev yapımı lezzet",
+  url: "https://koyumdengida.com.tr",
 
   // === 2. İLETİŞİM ve WHATSAPP ===
   address: {
-    street: "Sarma Sokağı No: 123", // Kendi adresinizle güncelleyin
+    street: "Sarma Sokağı No: 123",
     locality: "Lezzet Mahallesi",
-    city: "İstanbul", // Kendi şehrinizle güncelleyin
+    city: "İstanbul",
     country: "TR",
   },
-  phone: "+905550001122", // !! ÖNEMLİ: Kendi WhatsApp numaranızla değiştirin !!
-  email: "siparis@koyumdengida.com.tr", // Kendi e-postanızla güncelleyin
-  
-  // Arayüz için Açılış Saatleri
+  phone: "+905550001122",
+  email: "siparis@koyumdengida.com.tr",
+
   openingHours: [
     { day: "Hafta İçi", hours: "09:00 - 20:00" },
     { day: "Cumartesi", hours: "09:00 - 22:00" },
-    { day: "Pazar", hours: "Kapalı" }, // Örnek olarak güncellendi
+    { day: "Pazar", hours: "Kapalı" },
   ],
-  
-  // Schema Markup için Açılış Saatleri
+
   openingHoursSchema: [
     'Mo-Fr 09:00-20:00',
     'Sa 09:00-22:00',
-    'Su 00:00-00:00', // Pazar kapalı
+    'Su 00:00-00:00',
   ],
-  
-  // Sosyal Medya Linkleri
-  //social: {
-    //instagram: "https://instagram.com/koyumdengida", // Kendi linkinizle güncelleyin
-    //facebook: "https://facebook.com/koyumdengida",  // Kendi linkinizle güncelleyin
-  //},
 
   // === 3. GOOGLE ÜRÜN BİLGİSİ ===
   product: {
@@ -44,108 +36,96 @@ export const siteConfig = {
     brandName: "Köyümden Gıda",
   },
 
-  // === 4. BİLEŞEN İÇERİKLERİ (YENİ EKLENEN BÖLÜM) ===
+  // === 4. BİLEŞEN İÇERİKLERİ ===
   content: {
-    
-    // --- StoryGrid (Hikaye Bölümü) ---
+
+    // --- StoryGrid (Hikaye Bölümü - GÜNCELLENDİ) ---
     story: {
-      title: "Mutfağımızdan Sofranıza",
-      description: "Her bir sarma, aile geleneğimizin ve doğanın en iyisini sunma tutkusunun bir yansımasıdır.",
+      title: "Neden Vazgeçilmez?",
+      description: "Dedelerimizden öğrendik, annelerimizden aldık. Şimdi sizin mutfağınıza, aynı özenle getiriyoruz.",
       cards: [
         {
-          title: "Kalite Standardımız",
-          description: "Üç nesillik aile tarifimiz, modern teknolojiyle birleşti. El değmeden, hijyenik üretimle her sarmada aynı lezzet."
+          title: "Modern Gelenek",
+          description: "Üç nesillik aile tarifimiz, modern teknolojiyle birleşti. El değmeden, hijyenik üretimle her sarmada anne eli değmiş gibi."
         },
         {
-          title: "En Taze Yapraklar",
-          description: "Her sabah erken saatlerde toplanan, organik asma yaprakları. Doğanın en saf hali, mutfağımızda."
+          title: "Şafak Vakti Hasat",
+          description: "Her sabah güneş doğmadan toplanan, en taze asma yaprakları. Doğanın en saf, en canlı hali."
         },
         {
-          title: "Saf Zeytinyağı",
-          description: "Sadece yerel üreticilerden seçilen, soğuk sıkım zeytinyağı. Her damlası lezzet dolu."
+          title: "Altın Sıvı: Zeytinyağı",
+          description: "Sadece yerel üreticilerden seçilen, soğuk sıkım zeytinyağı. Boğazı yakmayan, yumuşacık bir lezzet."
         },
         {
-          title: "Mükemmel Karışım",
-          description: "Pirinç, baharat ve otların hassas dengesi. Makine hassasiyetiyle her sarmada tutarlı mükemmellik."
+          title: "İlmik İlmik Lezzet",
+          description: "Pirinç, baharat ve otların hassas dengesi. Ne çok ekşi, ne çok tuzlu; tam damağınıza layık."
         }
       ]
     },
 
-    // --- VideoShowcase (Video Bölümü) ---
+    // --- VideoShowcase ---
     video: {
       title: "Sarma Ritüeli",
-      description: "Nasıl yapıldığını izleyin: her adımda gösterilen özen ve tutku",
-      videoId: "dQw4w9WgXcQ", // Bu 'Rick Astley' videosunun ID'sidir :) Kendi YouTube video ID'niz ile değiştirin
-      videoTitle: "Köyümden Gıda - Organik Yaprak Sarma Üretim Videosu"
+      description: "Her adımda gösterilen özen ve tutkuyu izleyin.",
+      videoId: "dQw4w9WgXcQ",
+      videoTitle: "Köyümden Gıda - Üretim Hikayesi"
     },
 
-    // --- PhotoGallery (Galeri Bölümü) ---
+    // --- PhotoGallery ---
     gallery: {
       title: "Gözler İçin Bir Ziyafet",
-      description: "Her bir sarma, kalite standartlarımıza uygun olarak titizlikle hazırlanır ve sunulur.",
-      buttonText: "Tüm Galeriyi Görüntüle",
+      description: "Kalite tesadüf değildir; bir seçimdir.",
+      buttonText: "Galeriyi Keşfet",
       items: [
-        { 
-          id: 1, 
-          title: 'Modern Üretim Hattı', 
+        {
+          id: 1,
+          title: 'Modern Mutfak',
           src: '/images/gallery-1.webp',
           gridClass: 'md:col-span-2 md:row-span-2',
-          description: 'Son teknoloji ekipmanlarla hijyenik üretim',
-          alt: 'Yaprak sarma üretim hattı makinesi'
+          description: 'Hijyen ve teknolojinin buluşması',
+          alt: 'Yaprak sarma üretim tesisi'
         },
-        { 
-          id: 2, 
-          title: 'En Taze Asma Yaprakları', 
+        {
+          id: 2,
+          title: 'Tazelik',
           src: '/images/gallery-2.webp',
           gridClass: 'md:col-span-1 md:row-span-1',
-          description: 'Organik, sabah toplanan taze yapraklar',
-          alt: 'Üzerinde su damlaları olan taze asma yaprağı'
+          description: 'Dalından yeni kopmuş',
+          alt: 'Taze asma yaprağı'
         },
-        { 
-          id: 3, 
-          title: 'Saf Ege Zeytinyağı', 
+        {
+          id: 3,
+          title: 'Zeytinyağı',
           src: '/images/gallery-3.webp',
           gridClass: 'md:col-span-1 md:row-span-2',
-          description: 'Soğuk sıkım, yerel üreticilerden',
-          alt: 'Şişeden tavaya dökülen zeytinyağı'
+          description: 'Ege\'nin kalbinden',
+          alt: 'Zeytinyağı dökümü'
         },
-        { 
-          id: 4, 
-          title: 'Mükemmel Sunum', 
+        {
+          id: 4,
+          title: 'Sunum Sanatı',
           src: '/images/gallery-4.webp',
           gridClass: 'md:col-span-2 md:row-span-1',
-          description: 'Her tabak bir sanat eseri',
-          alt: 'Limon ve yoğurt ile servis edilen yaprak sarması tabağı'
+          description: 'Sofranızın yıldızı',
+          alt: 'Servis tabağı'
         },
       ]
     },
 
-    // === YENİ EKLENEN BÖLÜM: KURUMSAL REFERANSLAR ===
+    // --- Referanslar ---
     clients: {
-      title: "Güven Ortaklarımız",
-      description: "Lezzetlerimizi tercih eden değerli kurumsal iş ortaklarımızdan bazıları.",
-      // ÖNEMLİ: Bu logoları public/images/clients/ klasörüne kendiniz eklemelisiniz.
-      // === Test logoları eklendi ===
+      title: "Bizi Tercih Edenler",
+      description: "Kalitemize güvenen değerli iş ortaklarımız.",
       list: [
-        {
-          name: "Test Referans 1",
-          logo: "/images/clients/placeholder-1.svg" 
-        },
-        {
-          name: "Test Referans 2",
-          logo: "/images/clients/placeholder-2.svg" 
-        },
-        {
-          name: "Test Referans 3",
-          logo: "/images/clients/placeholder-3.svg" 
-        }
+        { name: "Referans 1", logo: "/images/clients/placeholder-1.svg" },
+        { name: "Referans 2", logo: "/images/clients/placeholder-2.svg" },
+        { name: "Referans 3", logo: "/images/clients/placeholder-3.svg" }
       ]
     },
 
-    // --- ContactSection (İletişim Bölümü) ---
     contact: {
-      title: "Köyümden Gıda'yı Ziyaret Edin",
-      description: "Sipariş verin veya dükkanımızda bizi ziyaret edin."
+      title: "Bizimle Tanışın",
+      description: "Sorularınız veya siparişleriniz için buradayız."
     }
   }
 };

@@ -13,9 +13,11 @@ export default function Home() {
       <HeroSection />
       <StoryGrid />
       <VideoShowcase />
-      <PhotoGallery /> 
-      <ClientLogos />
-      <ContactSection /> 
+      <PhotoGallery />
+      <div className="snap-section flex flex-col justify-center bg-cream">
+        <ClientLogos />
+        <ContactSection />
+      </div>
     </main>
   );
 }

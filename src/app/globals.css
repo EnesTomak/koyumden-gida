@@ -5,7 +5,7 @@
 :root {
   --background: #faf8f6;
   --foreground: #1a1a1a;
-  
+
   /* Nature Distilled Renk Paleti */
   --olive-green: #6b7f5a;
   --earth-brown: #8b6914;
@@ -22,19 +22,49 @@
 }
 
 html {
+  /* Dikeyde (y) zorunlu (mandatory) kilitleme */
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  /* Sayfanın tam ekran sığmasını garantiye al */
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-inter), sans-serif;
-  font-display: swap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-playfair), serif;
-  font-display: swap;
+}
+
+/* Her bölüm (section) için ortak sınıf */
+/* Bu sınıfı her bileşenin en dış div'ine veya section'ına ekleyeceğiz */
+.snap-section {
+  /* Sayfa kaydırıldığında bu elemanın başlangıcına (start) kilitlen */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* Hızlı kaydırmada bile durmayı zorla */
+
+  /* Her bölüm en az bir ekran boyu olmalı ki tam otursun */
+  min-height: 100vh;
+
+  /* İçeriği dikeyde ortalamak için (Opsiyonel ama şık durur) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
 @layer utilities {
@@ -43,6 +73,35 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+  /* Tahmini yükseklik */
+}
+
+/* Hero bölümü her zaman görünür olmalı (LCP için) */
+section:first-of-type {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Yumuşak geçiş */
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover efektlerinde performans için */
+.group:hover .group-hover\:scale-110 {
+  will-change: transform;
+}
 
 /* StoryGrid Kart Animasyonları */
 .story-card {

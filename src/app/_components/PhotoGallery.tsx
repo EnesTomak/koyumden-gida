@@ -1,99 +1,137 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { siteConfig } from '@/src/config/site'; // === GÜNCELLENDİ ===
+import { siteConfig } from '@/src/config/site';
 
-// === GÜNCELLENDİ: Galeri içeriği siteConfig'den çekiliyor ===
 const galleryContent = siteConfig.content.gallery;
 const galleryItems = galleryContent.items;
 
-// Tip tanımını da dinamik hale getiriyoruz
 type GalleryItem = (typeof galleryItems)[0];
 
 export default function PhotoGallery() {
   const [lightboxImage, setLightboxImage] = useState<GalleryItem | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // FAZ 3: Intersection Observer ile Scroll Reveal Animasyonu
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            // Performans için bir kez göründükten sonra takibi bırak
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 } // %15 görünür olduğunda tetikle
+    );
+
+    // .reveal-on-scroll sınıfına sahip tüm elemanları izle
+    const items = document.querySelectorAll('.gallery-item-reveal');
+    items.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="bg-white py-12 sm:py-20 px-4">
-      <div className="mx-auto max-w-7xl">
-        {/* Başlık (Dinamik) */}
-        <div className="mb-12 sm:mb-16 text-center">
-          <h2 className="font-serif mb-4 text-3xl sm:text-4xl md:text-5xl font-bold text-slate">
+    <section ref={sectionRef} className="snap-section bg-white px-4 relative overflow-hidden">
+      {/* FAZ 3: Dekoratif Arka Plan (Derinlik hissi için) */}
+      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-parchment/50 to-transparent pointer-events-none" />
+
+      <div className="mx-auto max-w-7xl relative z-10 w-full py-12 md:py-0">
+        {/* Başlık - Animasyonlu Gelir */}
+        <div className="mb-16 text-center gallery-item-reveal reveal-on-scroll">
+          <h2 className="font-serif mb-4 text-4xl sm:text-5xl font-bold text-slate">
             {galleryContent.title}
           </h2>
-          <p className="text-slate/70 mx-auto max-w-2xl text-sm sm:text-base">
+          <p className="text-slate/70 mx-auto max-w-2xl text-lg font-light">
             {galleryContent.description}
           </p>
         </div>
 
-        {/* Bento Grid (Dinamik) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[200px] md:auto-rows-[280px]">
-          {galleryItems.map((item) => (
-            <button 
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+          {galleryItems.map((item, index) => (
+            <button
               key={item.id}
-              className={`group relative overflow-hidden rounded-2xl bg-parchment shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer ${item.gridClass} text-left`}
+              // FAZ 3: 'gallery-item-reveal' ve 'reveal-on-scroll' sınıfları eklendi
+              // Resim geçiş süresi duration-1000 ile uzatıldı (sinematik etki)
+              className={`gallery-item-reveal reveal-on-scroll group relative overflow-hidden rounded-3xl bg-parchment shadow-md hover:shadow-2xl transition-all duration-700 cursor-pointer ${item.gridClass} text-left`}
               onClick={() => setLightboxImage(item)}
+              style={{ transitionDelay: `${index * 100}ms` }} // Sıralı geliş efekti (stagger)
               aria-label={`Galeride ${item.title} resmini tam ekran aç`}
             >
               <div className="absolute inset-0">
                 <Image
                   src={item.src}
-                  alt={item.alt} // === GÜNCELLENDİ (Dinamik alt etiket) ===
+                  alt={item.alt}
                   fill
                   quality={85}
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  // FAZ 3: Hover'da çok yumuşak zoom (scale-110)
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  placeholder="blur" 
-                  blurDataURL="data:image/webp;base64,UklGRloCAABXRUJQVlA4IE4CAAAwCQCdASoGAAQAAUA0JZwCdAD0/7+AA" 
+                  placeholder="blur"
+                  blurDataURL="data:image/webp;base64,UklGRloCAABXRUJQVlA4IE4CAAAwCQCdASoGAAQAAUA0JZwCdAD0/7+AA"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                <h3 className="font-serif text-white text-xl sm:text-2xl font-bold mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+
+              {/* FAZ 3: Overlay Gradient - Sadece altta ve daha belirgin */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+
+              {/* FAZ 3: Metin Animasyonları ve Altın Çizgi Detayı */}
+              <div className="absolute inset-0 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 className="font-serif text-white text-2xl font-bold mb-1 opacity-90 group-hover:opacity-100">
                   {item.title}
                 </h3>
-                <p className="text-white/90 text-sm sm:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                {/* Altın Çizgi (Gold Line) - Hover'da uzar */}
+                <div className="h-1 w-0 group-hover:w-12 bg-gold transition-all duration-500 mb-2" />
+
+                <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 transform translate-y-2 group-hover:translate-y-0">
                   {item.description}
                 </p>
               </div>
-              <div className="absolute top-4 right-4 w-2 h-2 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button> 
+
+              {/* Dekoratif nokta */}
+              <div className="absolute top-4 right-4 w-2 h-2 bg-gold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_10px_rgba(232,185,35,0.8)]" />
+            </button>
           ))}
         </div>
 
-        {/* Buton (Dinamik) */}
-        <div className="mt-12 text-center">
-          <button className="inline-flex items-center gap-2 px-8 py-3 bg-slate text-white rounded-full font-semibold hover:bg-slate/90 transition-colors duration-300">
+        {/* Buton */}
+        <div className="mt-16 text-center gallery-item-reveal reveal-on-scroll">
+          <button className="inline-flex items-center gap-3 px-10 py-4 bg-slate text-white rounded-full font-semibold hover:bg-slate/90 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">
             {galleryContent.buttonText}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Lightbox (Dinamik) */}
+      {/* Lightbox - Backdrop Blur Eklendi */}
       {lightboxImage && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-in fade-in duration-300"
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-in fade-in duration-300 backdrop-blur-sm"
           onClick={() => setLightboxImage(null)}
         >
           <button
             onClick={() => setLightboxImage(null)}
-            className="absolute top-4 right-4 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors duration-300 group"
+            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors duration-300 group z-50"
             aria-label="Kapat"
           >
-            <Cross2Icon className="w-6 h-6 text-white" />
+            <Cross2Icon className="w-8 h-8 text-white" />
           </button>
-          <div 
-            className="relative max-w-6xl w-full aspect-video"
+
+          <div
+            className="relative max-w-7xl w-full aspect-video shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
               src={lightboxImage.src}
-              alt={lightboxImage.alt} // === GÜNCELLENDİ ===
+              alt={lightboxImage.alt}
               fill
               quality={95}
               className="object-contain"
@@ -101,11 +139,12 @@ export default function PhotoGallery() {
               priority
             />
           </div>
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center max-w-2xl px-4">
-            <h3 className="font-serif text-white text-2xl sm:text-3xl font-bold mb-2">
+
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center max-w-3xl px-4">
+            <h3 className="font-serif text-white text-3xl font-bold mb-3 drop-shadow-md">
               {lightboxImage.title}
             </h3>
-            <p className="text-white/80 text-sm sm:text-base">
+            <p className="text-white/80 text-lg drop-shadow-md">
               {lightboxImage.description}
             </p>
           </div>

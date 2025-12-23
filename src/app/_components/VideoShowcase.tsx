@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
@@ -13,8 +13,8 @@ export default function VideoShowcase() {
   const videoTitle = videoContent.videoTitle;
 
   return (
-    <section className="bg-slate py-20 px-4">
-      <div className="mx-auto max-w-7xl">
+    <section className="snap-section bg-slate px-4 relative w-full overflow-hidden">
+      <div className="mx-auto max-w-7xl w-full">
         {/* Bölüm Başlığı (Dinamik) */}
         <div className="mb-12 text-center">
           <h2 className="font-serif mb-4 text-4xl font-bold text-white sm:text-5xl">
@@ -41,7 +41,7 @@ export default function VideoShowcase() {
                   loading="lazy"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 896px) 100vw, 896px"
-                  placeholder="blur" 
+                  placeholder="blur"
                   blurDataURL="data:image/webp;base64,UklGRj4CAABXRUJQVlA4IDICAADwAgCdASoGAAQAAUA0JZwCdAE/AAC1jbAAA"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/10">
