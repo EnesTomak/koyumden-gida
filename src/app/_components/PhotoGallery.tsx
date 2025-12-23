@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { siteConfig } from '@/src/config/site';
 
+// Config dosyasından galeri verilerini çekiyoruz
 const galleryContent = siteConfig.content.gallery;
 const galleryItems = galleryContent.items;
 
+// Typescript için tip tanımı
 type GalleryItem = (typeof galleryItems)[0];
 
 export default function PhotoGallery() {
@@ -38,12 +40,15 @@ export default function PhotoGallery() {
 
   return (
     <section ref={sectionRef} className="bg-white py-20 px-4 relative overflow-hidden">
+
       {/* FAZ 3: Dekoratif Arka Plan (Derinlik hissi için) */}
       <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-parchment/50 to-transparent pointer-events-none" />
 
       <div className="mx-auto max-w-7xl relative z-10">
+
         {/* Başlık - Animasyonlu Gelir */}
         <div className="mb-16 text-center gallery-item-reveal reveal-on-scroll">
+          <span className="text-gold font-serif italic text-2xl block mb-2">Göz Alıcı</span>
           <h2 className="font-serif mb-4 text-4xl sm:text-5xl font-bold text-slate">
             {galleryContent.title}
           </h2>
@@ -52,18 +57,19 @@ export default function PhotoGallery() {
           </p>
         </div>
 
-        {/* Bento Grid */}
+        {/* Bento Grid Yapısı */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] md:auto-rows-[300px]">
           {galleryItems.map((item, index) => (
             <button
               key={item.id}
-              // FAZ 3: 'gallery-item-reveal' ve 'reveal-on-scroll' sınıfları eklendi
-              // Resim geçiş süresi duration-1000 ile uzatıldı (sinematik etki)
+              // FAZ 3: Animasyon sınıfları ve Bento Grid sınıfı (item.gridClass)
               className={`gallery-item-reveal reveal-on-scroll group relative overflow-hidden rounded-3xl bg-parchment shadow-md hover:shadow-2xl transition-all duration-700 cursor-pointer ${item.gridClass} text-left`}
               onClick={() => setLightboxImage(item)}
               style={{ transitionDelay: `${index * 100}ms` }} // Sıralı geliş efekti (stagger)
               aria-label={`Galeride ${item.title} resmini tam ekran aç`}
             >
+
+              {/* Resim */}
               <div className="absolute inset-0">
                 <Image
                   src={item.src}
@@ -72,6 +78,7 @@ export default function PhotoGallery() {
                   quality={85}
                   // FAZ 3: Hover'da çok yumuşak zoom (scale-110)
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                  // PERFORMANS: Mobil ve masaüstü için doğru boyutları indir
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   placeholder="blur"
                   blurDataURL="data:image/webp;base64,UklGRloCAABXRUJQVlA4IE4CAAAwCQCdASoGAAQAAUA0JZwCdAD0/7+AA"
@@ -86,6 +93,7 @@ export default function PhotoGallery() {
                 <h3 className="font-serif text-white text-2xl font-bold mb-1 opacity-90 group-hover:opacity-100">
                   {item.title}
                 </h3>
+
                 {/* Altın Çizgi (Gold Line) - Hover'da uzar */}
                 <div className="h-1 w-0 group-hover:w-12 bg-gold transition-all duration-500 mb-2" />
 
@@ -109,14 +117,16 @@ export default function PhotoGallery() {
             </svg>
           </button>
         </div>
+
       </div>
 
-      {/* Lightbox - Backdrop Blur Eklendi */}
+      {/* Lightbox (Büyük Ekran) - Backdrop Blur Eklendi */}
       {lightboxImage && (
         <div
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-in fade-in duration-300 backdrop-blur-sm"
           onClick={() => setLightboxImage(null)}
         >
+          {/* Kapat Butonu */}
           <button
             onClick={() => setLightboxImage(null)}
             className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors duration-300 group z-50"
@@ -125,6 +135,7 @@ export default function PhotoGallery() {
             <Cross2Icon className="w-8 h-8 text-white" />
           </button>
 
+          {/* Büyük Resim */}
           <div
             className="relative max-w-7xl w-full aspect-video shadow-2xl"
             onClick={(e) => e.stopPropagation()}
@@ -136,10 +147,11 @@ export default function PhotoGallery() {
               quality={95}
               className="object-contain"
               sizes="100vw"
-              priority
+              priority // Tıklandığında anında yükle
             />
           </div>
 
+          {/* Resim Altı Bilgi */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center max-w-3xl px-4">
             <h3 className="font-serif text-white text-3xl font-bold mb-3 drop-shadow-md">
               {lightboxImage.title}

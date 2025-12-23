@@ -2,11 +2,10 @@ import HeroSection from './_components/HeroSection';
 import JourneySection from './_components/JourneySection';
 import StoryGrid from './_components/StoryGrid';
 import VideoShowcase from './_components/VideoShowcase';
-import dynamic from 'next/dynamic';
+// Dynamic import'u kaldırdık, direkt import ediyoruz:
+import PhotoGallery from './_components/PhotoGallery';
 import ClientLogos from './_components/ClientLogos';
 import Footer from './_components/Footer';
-
-const PhotoGallery = dynamic(() => import('./_components/PhotoGallery'));
 
 export default function Home() {
   return (
@@ -23,10 +22,12 @@ export default function Home() {
 
       <VideoShowcase />
 
+      {/* ID ekledik ki Header linki çalışsın */}
       <div id="galeri">
         <PhotoGallery />
       </div>
 
+      {/* İletişim ID'si buraya yönlendirsin */}
       <div id="iletisim">
         <ClientLogos />
       </div>
