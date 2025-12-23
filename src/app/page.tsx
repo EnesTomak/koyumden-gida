@@ -14,10 +14,8 @@ export default function Home() {
       <StoryGrid />
       <VideoShowcase />
       <PhotoGallery />
-      <div className="snap-section flex flex-col justify-center bg-cream">
-        <ClientLogos />
-        <ContactSection />
-      </div>
+      <ClientLogos />
+      <ContactSection />
     </main>
   );
 }

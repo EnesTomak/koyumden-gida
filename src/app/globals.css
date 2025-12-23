@@ -22,14 +22,8 @@
 }
 
 html {
-  /* Dikeyde (y) zorunlu (mandatory) kilitleme */
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-
-  /* Sayfanın tam ekran sığmasını garantiye al */
-  height: 100vh;
-  overflow-y: scroll;
 }
 
 body {
@@ -49,23 +43,7 @@ h6 {
   font-family: var(--font-playfair), serif;
 }
 
-/* Her bölüm (section) için ortak sınıf */
-/* Bu sınıfı her bileşenin en dış div'ine veya section'ına ekleyeceğiz */
-.snap-section {
-  /* Sayfa kaydırıldığında bu elemanın başlangıcına (start) kilitlen */
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  /* Hızlı kaydırmada bile durmayı zorla */
 
-  /* Her bölüm en az bir ekran boyu olmalı ki tam otursun */
-  min-height: 100vh;
-
-  /* İçeriği dikeyde ortalamak için (Opsiyonel ama şık durur) */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
 
 @layer utilities {
   .text-balance {

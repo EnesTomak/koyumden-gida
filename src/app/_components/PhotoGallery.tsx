@@ -37,11 +37,11 @@ export default function PhotoGallery() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="snap-section bg-white px-4 relative overflow-hidden">
+    <section ref={sectionRef} className="bg-white py-20 px-4 relative overflow-hidden">
       {/* FAZ 3: Dekoratif Arka Plan (Derinlik hissi için) */}
       <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-parchment/50 to-transparent pointer-events-none" />
 
-      <div className="mx-auto max-w-7xl relative z-10 w-full py-12 md:py-0">
+      <div className="mx-auto max-w-7xl relative z-10">
         {/* Başlık - Animasyonlu Gelir */}
         <div className="mb-16 text-center gallery-item-reveal reveal-on-scroll">
           <h2 className="font-serif mb-4 text-4xl sm:text-5xl font-bold text-slate">

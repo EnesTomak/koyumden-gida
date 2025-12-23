@@ -27,7 +27,7 @@ export default function HeroSection() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section className="snap-section relative w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden">
       {/* === ARKA PLAN (Paralaks Efektli) === */}
       {/* Arka plan kullanıcının scroll hızının yarısı kadar hareket eder (0.5),
          bu da derinlik hissi yaratır. 

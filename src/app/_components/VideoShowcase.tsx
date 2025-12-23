@@ -13,8 +13,8 @@ export default function VideoShowcase() {
   const videoTitle = videoContent.videoTitle;
 
   return (
-    <section className="snap-section bg-slate px-4 relative w-full overflow-hidden">
-      <div className="mx-auto max-w-7xl w-full">
+    <section className="bg-slate py-20 px-4">
+      <div className="mx-auto max-w-7xl">
         {/* Bölüm Başlığı (Dinamik) */}
         <div className="mb-12 text-center">
           <h2 className="font-serif mb-4 text-4xl font-bold text-white sm:text-5xl">

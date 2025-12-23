@@ -65,12 +65,12 @@ export default function StoryGrid() {
   ];
 
   return (
-    <section id="story" className="snap-section bg-cream px-4 relative overflow-hidden">
+    <section id="story" className="bg-cream py-24 px-4 relative overflow-hidden">
       {/* Arka plan süslemeleri (Zeytin dalı hissi veren flu daireler) */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-olive-light/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
-      <div className="mx-auto max-w-7xl relative z-10 w-full py-12 md:py-0">
+      <div className="mx-auto max-w-7xl relative z-10">
         <div className="mb-20 text-center max-w-3xl mx-auto">
           <span className="text-gold font-serif italic text-xl block mb-3">Neden Köyümden Gıda?</span>
           <h2 className="font-serif text-4xl sm:text-5xl font-bold text-deep-green mb-6 leading-tight">
